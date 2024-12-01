@@ -1,16 +1,14 @@
 import Container from './container'
-import { Button } from "./ui/button"
-import { EllipsisVertical } from "lucide-react"
 import UserMenu from "./user-menu"
+import UserDropdownOps from './user-dropdown-opts'
 
 const Header = () => {
+
   return (
     <Container className="py-4">
       <header className="flex justify-between items-center px-4">
         <UserMenu />
-        <Button size='icon' variant='outline'>
-          <EllipsisVertical />
-        </Button>
+        <UserDropdownOps />
       </header>
     </Container>
   )
