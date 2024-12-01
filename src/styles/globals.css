@@ -75,6 +75,8 @@ body {
 
 @layer utilities{
   .__hero-section{
-    
+    background-image: url('/assets/images/windows-vista-bg.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 }
