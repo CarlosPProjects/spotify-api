@@ -6,7 +6,7 @@ import UserMenu from "./user-menu"
 const Header = () => {
   return (
     <Container className="py-4">
-      <header className="flex justify-between items-center">
+      <header className="flex justify-between items-center px-4">
         <UserMenu />
         <Button size='icon' variant='outline'>
           <EllipsisVertical />
