@@ -19,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import SoundWave from "./sound-wave"
 
 const filterSchema = z.object({
   filter: z
@@ -50,11 +51,14 @@ const SelectSpotifyFilter = () => {
                   field.onChange(value);
                   form.handleSubmit(onSubmit)();
                 }}
-                defaultValue={field.value}  
+                defaultValue={field.value}
               >
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select filter" />
+                <FormControl className="border-none shadow-none font-semibold">
+                  <SelectTrigger className="gap-2">
+                    <>
+                      <SoundWave />
+                      <SelectValue placeholder="Filter" />
+                    </>
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>

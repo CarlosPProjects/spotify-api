@@ -42,7 +42,7 @@ const MusicCardList = () => {
             <div className="p-0">
               <Card className="group space-y-4 border-none shadow-none">
                 <CardContent className="p-0 rounded-3xl ">
-                  <div className="flex flex-col gap-6 sm:gap-4 py-5">
+                  <div className="flex flex-col gap-6 sm:gap-4 pb-5">
                     <div className="flex justify-center items-center overflow-hidden aspect-square relative __disc-cover before:-translate-x-1/2 sm:before:translate-x-0">
                       <span className="text-3xl font-semibold h-full">
                         <Image className="max-sm:animate-spinDisc p-2" src='/assets/images/disc-vinil.webp' alt="disco-de-vinilo" fill />
