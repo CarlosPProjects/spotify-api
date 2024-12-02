@@ -5,7 +5,7 @@ import axios from "axios"
 const SPOTIFY_TOKEN_URI = "https://accounts.spotify.com/api/token"
 const SPOTIFY_ENDPOINT = "https://api.spotify.com/v1"
 
-interface AccessTokenResponse {
+export interface AccessTokenResponse {
   access_token: string
   token_type: string
   expires_in: number
@@ -30,7 +30,7 @@ export const getCurrentUserPlayLists = async (access_token: string) => {
   const response = await axios.get(`${SPOTIFY_ENDPOINT}/me/playlists`, {
     headers: {
       "Authorization": `Bearer ${access_token}`
-    }
+    },
   })
 
   return response.data

@@ -1,11 +1,12 @@
 'use client'
 
-import { signOut } from "@/auth"
 import { DropdownMenuItem } from "./ui/dropdown-menu"
+import { logout } from "@/actions/auth"
 
 const LogOutBtn = () => {
+
   return (
-    <DropdownMenuItem onClick={() => signOut}>
+    <DropdownMenuItem onClick={logout}>
       Log Out
     </DropdownMenuItem>
   )
