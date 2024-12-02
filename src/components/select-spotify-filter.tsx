@@ -4,13 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { Button } from "@/components/ui/button"
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form"
 
@@ -52,7 +50,8 @@ const SelectSpotifyFilter = () => {
                   field.onChange(value);
                   form.handleSubmit(onSubmit)();
                 }}
-                defaultValue={field.value}>
+                defaultValue={field.value}  
+              >
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select filter" />

@@ -49,8 +49,8 @@ const MusicCardList = () => {
                       </span>
                     </div>
                     <div className="w-full h-full flex flex-col gap-1 items-center justify-center text-center">
-                      <span className="text-lg sm:text-base font-semibold">Music Title(by .)</span>
-                      <span className="text-sm text-muted-foreground">Author1, Author2</span>
+                      <span className="text-lg sm:text-sm font-semibold">Music Title(by .)</span>
+                      <span className="text-xs text-muted-foreground">Author1, Author2</span>
                     </div>
                   </div>
                 </CardContent>
