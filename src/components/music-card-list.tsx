@@ -34,11 +34,11 @@ const MusicCardList = () => {
       }}
       className="w-full"
     >
-      <CarouselContent className="-ml-2">
+      <CarouselContent className="-ml-4">
         {Array.from({ length: 6 }).map((_, index) => (
-          <CarouselItem key={index} className="sm:basis-1/2 md:basis-1/4 lg:basis-1/5 pl-2">
+          <CarouselItem key={index} className="sm:basis-1/2 md:basis-1/4 lg:basis-1/5 pl-4">
             <div className="p-0">
-              <Card className="rounded-none group">
+              <Card className="rounded-none group space-y-4 border-none shadow-none">
                 <CardContent className="aspect-square p-0">
                   <div className="flex justify-center items-center overflow-hidden h-full relative __disc-cover">
                     <span className="text-3xl font-semibold">
@@ -47,8 +47,8 @@ const MusicCardList = () => {
                   </div>
                 </CardContent>
                 <CardFooter>
-                  <div className="flex flex-col space-y-1 items-center justify-center">
-                    <span className="font-semibold">Music Title(by Xt)</span>
+                  <div className="flex flex-col space-y-1 items-center justify-center text-center">
+                    <span className="font-semibold">Music Title(by .)</span>
                     <span className="text-sm text-muted-foreground">Author1, Author2</span>
                   </div>
                 </CardFooter>
