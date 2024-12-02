@@ -95,10 +95,10 @@ body {
   }
 
   .__disc-cover:hover::before {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 
-  .__disc-cover:hover img {
+  /* .__disc-cover:hover img {
     animation: spinDisc 3s linear infinite;
   }
 
@@ -110,5 +110,5 @@ body {
     to {
       transform: rotate(360deg);
     }
-  }
+  } */
 }

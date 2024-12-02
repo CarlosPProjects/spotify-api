@@ -1,6 +1,6 @@
 import Container from './container'
 import UserMenu from "./user-menu"
-import UserDropdownOps from './user-dropdown-opts'
+import LogOutBtn from './logout-btn'
 
 const Header = () => {
 
@@ -8,7 +8,7 @@ const Header = () => {
     <Container className="py-4">
       <header className="flex justify-between items-center sm:px-4">
         <UserMenu />
-        <UserDropdownOps />
+        <LogOutBtn />
       </header>
     </Container>
   )

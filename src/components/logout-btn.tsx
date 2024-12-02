@@ -1,14 +1,15 @@
 'use client'
 
-import { DropdownMenuItem } from "./ui/dropdown-menu"
+import { LogOut } from "lucide-react"
+import { Button } from "./ui/button"
 import { logout } from "@/actions/auth"
 
 const LogOutBtn = () => {
 
   return (
-    <DropdownMenuItem onClick={logout}>
-      Log Out
-    </DropdownMenuItem>
+    <Button size='icon' variant='ghost' onClick={logout}>
+      <LogOut />
+    </Button>
   )
 }
 
