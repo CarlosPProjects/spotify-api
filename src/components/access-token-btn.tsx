@@ -2,7 +2,7 @@
 
 import { getSpotifyToken } from '@/actions/spotify'
 import React from 'react'
-import { Button } from './ui/button'
+import { DropdownMenuItem } from './ui/dropdown-menu'
 
 const AccessTokenBtn = () => {
 
@@ -21,9 +21,9 @@ const AccessTokenBtn = () => {
   }
 
   return (
-    <Button variant='outline' onClick={handleClick}>
-      {isLoading ? 'Cargando...' : 'Obtener token'}
-    </Button>
+    <DropdownMenuItem onClick={handleClick} >
+      {isLoading ? 'Loading...' : 'Get Token'}
+    </DropdownMenuItem>
   )
 }
 

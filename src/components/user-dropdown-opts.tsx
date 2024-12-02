@@ -2,26 +2,30 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { EllipsisVertical } from "lucide-react"
+import { Button } from "./ui/button"
+import AccessTokenBtn from "./access-token-btn"
+import LogOutBtn from "./logout-btn"
 
 
 const UserDropdownOps = () => {
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <EllipsisVertical />
+    <DropdownMenu modal={false}>
+      <DropdownMenuTrigger asChild>
+        <Button variant='outline' size='icon'>
+          <EllipsisVertical />
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuItem>
+          Profile
+        </DropdownMenuItem>
+        <AccessTokenBtn />
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Profile</DropdownMenuItem>
-        <DropdownMenuItem>Billing</DropdownMenuItem>
-        <DropdownMenuItem>Team</DropdownMenuItem>
-        <DropdownMenuItem>Subscription</DropdownMenuItem>
+        <LogOutBtn />
       </DropdownMenuContent>
     </DropdownMenu>
   )
