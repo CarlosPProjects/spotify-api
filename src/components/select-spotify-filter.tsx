@@ -41,14 +41,18 @@ const SelectSpotifyFilter = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+      <form>
         <FormField
           control={form.control}
           name="filter"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Email</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select
+                onValueChange={(value) => {
+                  field.onChange(value);
+                  form.handleSubmit(onSubmit)();
+                }}
+                defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select filter" />
@@ -56,15 +60,14 @@ const SelectSpotifyFilter = () => {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value="tracks">Top Tracks</SelectItem>
-                  <SelectItem value="tracks">My Playlists</SelectItem>
-                  <SelectItem value="tracks">Top Artists</SelectItem>
+                  <SelectItem value="playlists">My Playlists</SelectItem>
+                  <SelectItem value="artists">Top Artists</SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
       </form>
     </Form>
   )
