@@ -1,13 +1,8 @@
-import { auth } from '@/auth'
 import Container from '@/components/container'
 import MusicCardList from '@/components/music-card-list'
 import React from 'react'
 
-const Home = async () => {
-
-  const session = await auth()
-
-  console.log(session);
+const Home = () => {
 
   return (
     <Container className='flex-1 flex'>

@@ -4,6 +4,14 @@ import spotify from "next-auth/providers/spotify"
 import { JWT } from "next-auth/jwt"
 import { Session } from "next-auth"
 
+export interface ISession extends Session {
+  accessToken?: string
+}
+
+interface IJWT extends JWT {
+  accessToken?: string
+}
+
 const providers: Provider[] = [
   spotify({
     clientId: process.env.AUTH_SPOTIFY_ID,
@@ -26,11 +34,3 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }
   }
 });
-
-interface ISession extends Session {
-  accessToken?: string
-}
-
-interface IJWT extends JWT {
-  accessToken?: string
-}
