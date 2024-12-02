@@ -1,8 +1,14 @@
+import { auth } from '@/auth'
 import Container from '@/components/container'
 import MusicCardList from '@/components/music-card-list'
 import React from 'react'
 
-const Home = () => {
+const Home = async () => {
+
+  const session = await auth()
+
+  console.log(session);
+
   return (
     <Container className='flex-1 flex'>
       <main className='w-full rounded-3xl bg-gray-200/50 backdrop-blur p-2'>

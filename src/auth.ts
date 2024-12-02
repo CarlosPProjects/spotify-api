@@ -14,7 +14,7 @@ const providers: Provider[] = [
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers,
   callbacks: {
-    jwt: async ({ token, trigger, session, account }) => {
+    jwt: async ({ token, account }) => {
       if (account?.provider === "spotify") {
         return { ...token, accessToken: account.access_token }
       }
