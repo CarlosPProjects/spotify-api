@@ -1,23 +1,18 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "@/styles/globals.css";
-import Header from "@/components/header";
+import { Inter } from "next/font/google"
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import Header from "@/components/header";
 
 export const metadata: Metadata = {
   title: "Spotify API",
   description: "Spotify API",
 };
+
+const inter = Inter({
+  weight: ['100', "200", "300", "400", "500", "600", "700", "800", "900"],
+  style: ['normal', 'italic'],
+})
 
 export default function RootLayout({
   children,
@@ -27,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.className} antialiased`}
       >
         <div className="flex flex-col min-h-screen">
           <Header />

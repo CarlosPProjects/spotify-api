@@ -1,9 +1,7 @@
-
 import { auth } from '@/auth'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import AuthBtn from './auth-btn'
 import { getInitials } from '@/lib/utils'
-// // import { IAuth } from '@/types/user'
 
 const UserMenu = async () => {
 
