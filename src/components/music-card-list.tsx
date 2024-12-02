@@ -40,9 +40,9 @@ const MusicCardList = () => {
             <div className="p-0">
               <Card className="rounded-none group">
                 <CardContent className="aspect-square p-0">
-                  <div className="overflow-hidden relative __disc-cover">
+                  <div className="flex justify-center items-center overflow-hidden h-full relative __disc-cover">
                     <span className="text-3xl font-semibold">
-                      <Image className="group-hover:scale-110 transition-all duration-300" src='/assets/images/disco-de-vinilo-removebg-preview.png' alt="disco-de-vinilo" width={200} height={200} />
+                      <Image className="group-hover:scale-105 transition-all duration-300" src='/assets/images/disco-de-vinilo-removebg-preview.png' alt="disco-de-vinilo" width={150} height={150} />
                     </span>
                   </div>
                 </CardContent>

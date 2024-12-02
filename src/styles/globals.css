@@ -79,12 +79,13 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
   }
-  .__disc-cover::before{
+  /* .__disc-cover::before{
     content: url('/assets/images/cover-vinil.jpg');
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-  }
+    z-index: 1;
+  } */
 }
