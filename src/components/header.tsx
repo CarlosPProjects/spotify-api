@@ -6,7 +6,7 @@ const Header = () => {
 
   return (
     <Container className="py-4">
-      <header className="flex justify-between items-center px-4">
+      <header className="flex justify-between items-center sm:px-4">
         <UserMenu />
         <UserDropdownOps />
       </header>

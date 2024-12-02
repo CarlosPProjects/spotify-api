@@ -31,27 +31,29 @@ const MusicCardList = () => {
     <Carousel
       opts={{
         align: "start",
+        loop: true,
+        skipSnaps: false,
       }}
-      className="w-full"
+      className="w-full "
     >
       <CarouselContent className="-ml-4">
         {Array.from({ length: 6 }).map((_, index) => (
-          <CarouselItem key={index} className="sm:basis-1/2 md:basis-1/4 lg:basis-1/5 pl-4">
+          <CarouselItem key={index} className="pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
             <div className="p-0">
               <Card className="rounded-none group space-y-4 border-none shadow-none">
-                <CardContent className="aspect-square p-0">
-                  <div className="flex justify-center items-center overflow-hidden h-full relative __disc-cover">
-                    <span className="text-3xl font-semibold">
-                      <Image className="group-hover:scale-105 transition-all duration-300" src='/assets/images/disco-de-vinilo-removebg-preview.png' alt="disco-de-vinilo" width={150} height={150} />
-                    </span>
+                <CardContent className="p-0">
+                  <div className="flex flex-col gap-4">
+                    <div className="flex justify-center items-center overflow-hidden aspect-square relative __disc-cover before:-translate-x-1/2 sm:before:translate-x-0">
+                      <span className="text-3xl font-semibold h-full">
+                        <Image className="group-hover:scale-105 transition-all duration-300 p-4" src='/assets/images/disc-vinil.webp' alt="disco-de-vinilo" fill />
+                      </span>
+                    </div>
+                    <div className="w-full h-full flex flex-col space-y-1 items-center justify-center text-center">
+                      <span className="font-semibold">Music Title(by .)</span>
+                      <span className="text-sm text-muted-foreground">Author1, Author2</span>
+                    </div>
                   </div>
                 </CardContent>
-                <CardFooter>
-                  <div className="flex flex-col space-y-1 items-center justify-center text-center">
-                    <span className="font-semibold">Music Title(by .)</span>
-                    <span className="text-sm text-muted-foreground">Author1, Author2</span>
-                  </div>
-                </CardFooter>
               </Card>
             </div>
           </CarouselItem>
