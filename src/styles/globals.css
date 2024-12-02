@@ -73,13 +73,14 @@ body {
   }
 }
 
-@layer utilities {
+@layer components {
   .__hero-section {
     background-image: url("/assets/images/windows-vista-bg.webp");
     background-size: cover;
     background-repeat: no-repeat;
   }
-  .__disc-cover::before{
+
+  .__disc-cover::before {
     content: '';
     background-image: url('/assets/images/cover-vinil.jpg');
     background-position: center;
@@ -93,20 +94,21 @@ body {
     z-index: 1;
   }
 
-  .__disc-cover:hover::before{
+  .__disc-cover:hover::before {
     transform: translateX(-100%);
   }
 
-  .__disc-cover:hover img{
+  .__disc-cover:hover img {
     animation: spinDisc 3s linear infinite;
   }
-}
 
-@keyframes spinDisc {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  @keyframes spinDisc {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
+    }
   }
 }

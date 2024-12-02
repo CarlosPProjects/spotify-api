@@ -42,14 +42,14 @@ const MusicCardList = () => {
             <div className="p-0">
               <Card className="rounded-none group space-y-4 border-none shadow-none">
                 <CardContent className="p-0">
-                  <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-6 sm:gap-4">
                     <div className="flex justify-center items-center overflow-hidden aspect-square relative __disc-cover before:-translate-x-1/2 sm:before:translate-x-0">
                       <span className="text-3xl font-semibold h-full">
-                        <Image className="group-hover:scale-105 transition-all duration-300 p-4" src='/assets/images/disc-vinil.webp' alt="disco-de-vinilo" fill />
+                        <Image className="max-sm:animate-spinDisc p-2" src='/assets/images/disc-vinil.webp' alt="disco-de-vinilo" fill />
                       </span>
                     </div>
-                    <div className="w-full h-full flex flex-col space-y-1 items-center justify-center text-center">
-                      <span className="font-semibold">Music Title(by .)</span>
+                    <div className="w-full h-full flex flex-col gap-1 items-center justify-center text-center">
+                      <span className="text-lg sm:text-base font-semibold">Music Title(by .)</span>
                       <span className="text-sm text-muted-foreground">Author1, Author2</span>
                     </div>
                   </div>
