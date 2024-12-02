@@ -34,7 +34,7 @@ const MusicCardList = () => {
         loop: true,
         skipSnaps: false,
       }}
-      className="w-full "
+      className="w-full"
     >
       <CarouselContent className="-ml-4">
         {Array.from({ length: 6 }).map((_, index) => (
