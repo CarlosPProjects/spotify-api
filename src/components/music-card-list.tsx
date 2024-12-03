@@ -35,7 +35,7 @@ const MusicCardList = () => {
       opts={{
         align: "start",
         loop: true,
-        skipSnaps: false,
+        dragFree: true,
       }}
       className="w-full"
     >
@@ -50,9 +50,7 @@ const MusicCardList = () => {
                       <div className="absolute w-full border-2 h-full -translate-x-1/2 group-hover:-translate-x-1/2 sm:translate-x-0 z-10 duration-300 transition-all">
                         <Image src={track.album.images[0].url} alt="album-cover" fill className="object-cover object-center" />
                       </div>
-                      <span className="text-3xl font-semibold h-full">
-                        <Image className="max-sm:animate-spinDisc p-2" src='/assets/images/disc-vinil.webp' alt="disco-de-vinilo" fill />
-                      </span>
+                      <Image className="max-sm:animate-spinDisc p-2" src='/assets/images/vinyl.webp' alt="disco-de-vinilo" fill />
                     </div>
                     <div className="w-full h-full flex flex-col gap-1 items-center justify-center text-center">
                       <span className="text-lg sm:text-sm font-semibold">{track.name}</span>
