@@ -26,32 +26,21 @@ export const getSpotifyToken = async (): Promise<AccessTokenResponse> => {
   return response.data as AccessTokenResponse
 }
 
-export const getCurrentUserPlayLists = async (access_token: string) => {
-  const response = await axios.get(`${SPOTIFY_ENDPOINT}/me/playlists`, {
-    headers: {
-      "Authorization": `Bearer ${access_token}`
-    },
-  })
-
-  return response.data
-}
-
-export const getCurrentUserSavedTracks = async (access_token: string) => {
-  const response = await axios.get(`${SPOTIFY_ENDPOINT}/me/tracks?limit=7`, {
-    headers: {
-      "Authorization": `Bearer ${access_token}`
-    },
-  })
-
-  return response.data
-}
-
-export const getArtistsTopTracks = async (access_token: string, id: string) => {
-  const response = await axios.get(`${SPOTIFY_ENDPOINT}/artists/${id}/top-tracks`, {
+export const getCurrentUserTopTracks = async (access_token: string) => {
+  const response = await axios.get(`${SPOTIFY_ENDPOINT}/me/top/tracks?limit=5`, {
     headers: {
       "Authorization": `Bearer ${access_token}`
     }
   })
 
+  return response.data
+}
+
+export const getCurrentUserTopArtists = async (access_token: string) => {
+  const response = await axios.get(`${SPOTIFY_ENDPOINT}/me/top/artists?limit=5`, {
+    headers: {
+      "Authorization": `Bearer ${access_token}`
+    }
+  })
   return response.data
 }

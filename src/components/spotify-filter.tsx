@@ -20,8 +20,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import SoundWave from "./sound-wave"
-import { getCurrentUserPlayLists, getCurrentUserSavedTracks } from "@/actions/spotify"
 import { getUserAccessToken } from "@/actions/auth"
+import { getCurrentUserTopArtists, getCurrentUserTopTracks } from "@/actions/spotify"
 
 const filterSchema = z.object({
   filter: z
@@ -39,9 +39,17 @@ const SpotifyFilter = () => {
   async function onSubmit(data: z.infer<typeof filterSchema>) {
     const accessToken = await getUserAccessToken()
     if (!accessToken) return;
-    console.log(accessToken);
-    const res = await getCurrentUserSavedTracks(accessToken)
-    console.log(res);
+
+    switch (data.filter) {
+      case "tracks":
+        const res1 = await getCurrentUserTopTracks(accessToken)
+        console.log(res1);
+        break;
+      case "artists":
+        const res2 = await getCurrentUserTopArtists(accessToken)
+        console.log(res2);
+        break;
+    }
   }
 
   return (
@@ -69,7 +77,6 @@ const SpotifyFilter = () => {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value="tracks">Top Tracks</SelectItem>
-                  <SelectItem value="playlists">My Playlists</SelectItem>
                   <SelectItem value="artists">Top Artists</SelectItem>
                 </SelectContent>
               </Select>

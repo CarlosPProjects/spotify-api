@@ -10,10 +10,9 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel"
 
-import { getCurrentUserSavedTracks } from "@/actions/spotify"
 import { getUserAccessToken } from "@/actions/auth"
 import { IPlayList } from "@/types/spotify/playlist"
-import { SavedTracks } from "@/types/spotify/saved-tracks"
+import { ISavedTracks } from "@/types/spotify/saved-tracks"
 
 import { dumbData } from "@/data/dumbdata"
 import { ISession } from "@/auth"
@@ -24,7 +23,7 @@ interface Props {
 
 const MusicCardList: FC<Props> = ({ session }) => {
 
-  const [savedTracks, setSavedTracks] = useState<SavedTracks>(dumbData);
+  const [savedTracks, setSavedTracks] = useState<ISavedTracks>(dumbData);
 
   // useEffect(() => {
   //   const getPlaylist = async () => {
