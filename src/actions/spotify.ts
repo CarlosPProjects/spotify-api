@@ -37,7 +37,7 @@ export const getCurrentUserPlayLists = async (access_token: string) => {
 }
 
 export const getCurrentUserSavedTracks = async (access_token: string) => {
-  const response = await axios.get(`${SPOTIFY_ENDPOINT}/me/tracks`, {
+  const response = await axios.get(`${SPOTIFY_ENDPOINT}/me/tracks?limit=7`, {
     headers: {
       "Authorization": `Bearer ${access_token}`
     },

@@ -12,10 +12,29 @@ interface IJWT extends JWT {
   accessToken?: string
 }
 
+const scopes = [
+  "user-read-email",
+  "playlist-read-private",
+  "playlist-modify-private",
+  "playlist-modify-public",
+  "user-read-private",
+  "user-library-read",
+  "user-library-modify",
+  "user-read-playback-state",
+  "user-modify-playback-state",
+  "user-read-currently-playing",
+  "user-read-recently-played",
+  "streaming"
+].join(" ")
+
 const providers: Provider[] = [
   spotify({
     clientId: process.env.AUTH_SPOTIFY_ID,
     clientSecret: process.env.AUTH_SPOTIFY_SECRET,
+    authorization: {
+      url: "https://accounts.spotify.com/authorize",
+      params: { scope: scopes }
+    }
   })
 ]
 

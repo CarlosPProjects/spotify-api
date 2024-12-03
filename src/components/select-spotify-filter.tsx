@@ -41,7 +41,7 @@ const SelectSpotifyFilter = () => {
     const accessToken = await getUserAccessToken()
     if (!accessToken) return;
     console.log(accessToken);
-    const res = await getCurrentUserPlayLists(accessToken)
+    const res = await getCurrentUserSavedTracks(accessToken)
     console.log(res);
   }
 
