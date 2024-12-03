@@ -17,7 +17,7 @@ const UserMenu = async () => {
       </Avatar>
       <div className='flex flex-col'>
         <span className='text-sm font-semibold'>{session.user?.name}</span>
-        <span className='text-sm font-medium text-muted-foreground'>{session.user?.email}</span>
+        <span className='text-xs font-medium text-muted-foreground'>{session.user?.email}</span>
       </div>
     </div>
   )

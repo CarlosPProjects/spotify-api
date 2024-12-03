@@ -21,7 +21,6 @@ import {
 } from "@/components/ui/select"
 import SoundWave from "./sound-wave"
 import { getCurrentUserPlayLists, getCurrentUserSavedTracks } from "@/actions/spotify"
-import { auth, ISession } from "@/auth"
 import { getUserAccessToken } from "@/actions/auth"
 
 const filterSchema = z.object({
