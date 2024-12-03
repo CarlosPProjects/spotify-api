@@ -2,7 +2,7 @@ import Container from './container'
 import UserMenu from "./user-menu"
 import LogOutBtn from './logout-btn'
 import { auth } from '@/auth'
-import { Button } from './ui/button'
+import LoginBtn from './login-btn'
 
 const Header = async () => {
 
@@ -12,7 +12,7 @@ const Header = async () => {
     <Container className="py-4">
       <header className="flex justify-between items-center sm:px-4">
         <UserMenu />
-        {session ? <LogOutBtn /> : <Button>Login</Button>}
+        {session ? <LogOutBtn /> : <LoginBtn />}
       </header>
     </Container>
   )
