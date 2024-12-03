@@ -1,35 +1,39 @@
 'use client'
 
-import { getUserAccessToken } from "@/actions/auth"
-import { getCurrentUserSavedTracks } from "@/actions/spotify"
+import Image from "next/image"
+import { useEffect, useState } from "react"
+
 import { Card, CardContent } from "@/components/ui/card"
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel"
+
+import { getCurrentUserSavedTracks } from "@/actions/spotify"
+import { getUserAccessToken } from "@/actions/auth"
 import { IPlayList } from "@/types/spotify/playlist"
 import { SavedTracks } from "@/types/spotify/saved-tracks"
-import Image from "next/image"
-import { useEffect, useState } from "react"
+
+import { dumbData } from "@/data/dumbdata"
 
 const MusicCardList = () => {
 
-  const [savedTracks, setSavedTracks] = useState<SavedTracks>();
+  const [savedTracks, setSavedTracks] = useState<SavedTracks>(dumbData);
 
-  useEffect(() => {
-    const getPlaylist = async () => {
-      const accessToken = await getUserAccessToken()
-      if (!accessToken) {
-        console.log('No access token found');
-        return
-      }
-      console.log(accessToken);
-      const list = await getCurrentUserSavedTracks(accessToken)
-      setSavedTracks(list)
-    }
-    getPlaylist()
-  }, [])
+  // useEffect(() => {
+  //   const getPlaylist = async () => {
+  //     const accessToken = await getUserAccessToken()
+  //     if (!accessToken) {
+  //       console.log('No access token found');
+  //       return
+  //     }
+  //     console.log(accessToken);
+  //     const list = await getCurrentUserSavedTracks(accessToken)
+  //     setSavedTracks(list)
+  //   }
+  //   getPlaylist()
+  // }, [])
   return (
     <Carousel
       opts={{

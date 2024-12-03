@@ -1,4 +1,3 @@
-import { auth } from '@/auth'
 import SpotifyFilter from './spotify-filter'
 import { cn } from '@/lib/utils'
 import {
@@ -7,11 +6,16 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { FC } from 'react'
+import { ISession } from '@/auth'
 
+interface Props {
+  auth: Promise<ISession | null>
+}
 
-const SpotifyHeader = async () => {
+const SpotifyHeader: FC<Props> = async ({ auth }) => {
 
-  const session = await auth()
+  const session = await auth
 
   return (
     <header className='w-full flex justify-center sm:justify-between items-center p-4'>
