@@ -1,5 +1,5 @@
 import { auth } from '@/auth'
-import SelectSpotifyFilter from './select-spotify-filter'
+import SpotifyFilter from './spotify-filter'
 
 const SpotifyHeader = async () => {
 
@@ -8,7 +8,7 @@ const SpotifyHeader = async () => {
   return (
     <header className='w-full flex justify-center sm:justify-between items-center p-4'>
       <span className='hidden sm:block font-semibold'>ipsum</span>
-      {session && <SelectSpotifyFilter />}
+      {session && <SpotifyFilter />}
     </header>
   )
 }

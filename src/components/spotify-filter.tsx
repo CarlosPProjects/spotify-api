@@ -30,7 +30,7 @@ const filterSchema = z.object({
     })
 })
 
-const SelectSpotifyFilter = () => {
+const SpotifyFilter = () => {
 
   const form = useForm<z.infer<typeof filterSchema>>({
     resolver: zodResolver(filterSchema),
@@ -82,4 +82,4 @@ const SelectSpotifyFilter = () => {
   )
 }
 
-export default SelectSpotifyFilter
+export default SpotifyFilter
