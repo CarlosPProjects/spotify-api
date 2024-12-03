@@ -11,8 +11,8 @@ export interface AccessTokenResponse {
   expires_in: number
 }
 
-export const getSpotifyToken = async () : Promise<AccessTokenResponse> => {
-  
+export const getSpotifyToken = async (): Promise<AccessTokenResponse> => {
+
   const response = await axios.post(SPOTIFY_TOKEN_URI, {
     grant_type: "client_credentials",
     client_id: process.env.AUTH_SPOTIFY_ID,
@@ -28,6 +28,16 @@ export const getSpotifyToken = async () : Promise<AccessTokenResponse> => {
 
 export const getCurrentUserPlayLists = async (access_token: string) => {
   const response = await axios.get(`${SPOTIFY_ENDPOINT}/me/playlists`, {
+    headers: {
+      "Authorization": `Bearer ${access_token}`
+    },
+  })
+
+  return response.data
+}
+
+export const getCurrentUserSavedTracks = async (access_token: string) => {
+  const response = await axios.get(`${SPOTIFY_ENDPOINT}/me/tracks`, {
     headers: {
       "Authorization": `Bearer ${access_token}`
     },

@@ -20,6 +20,9 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import SoundWave from "./sound-wave"
+import { getCurrentUserPlayLists, getCurrentUserSavedTracks } from "@/actions/spotify"
+import { auth, ISession } from "@/auth"
+import { getUserAccessToken } from "@/actions/auth"
 
 const filterSchema = z.object({
   filter: z
@@ -34,8 +37,12 @@ const SelectSpotifyFilter = () => {
     resolver: zodResolver(filterSchema),
   })
 
-  function onSubmit(data: z.infer<typeof filterSchema>) {
-    console.log(data);
+  async function onSubmit(data: z.infer<typeof filterSchema>) {
+    const accessToken = await getUserAccessToken()
+    if (!accessToken) return;
+    console.log(accessToken);
+    const res = await getCurrentUserPlayLists(accessToken)
+    console.log(res);
   }
 
   return (
