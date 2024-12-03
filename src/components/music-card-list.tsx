@@ -24,12 +24,12 @@ const MusicCardList = () => {
         console.log('No access token found');
         return
       }
+      console.log(accessToken);
       const list = await getCurrentUserSavedTracks(accessToken)
       setSavedTracks(list)
     }
     getPlaylist()
   }, [])
-
   return (
     <Carousel
       opts={{

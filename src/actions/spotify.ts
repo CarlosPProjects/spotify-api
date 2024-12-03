@@ -45,3 +45,13 @@ export const getCurrentUserSavedTracks = async (access_token: string) => {
 
   return response.data
 }
+
+export const getArtistsTopTracks = async (access_token: string, id: string) => {
+  const response = await axios.get(`${SPOTIFY_ENDPOINT}/artists/${id}/top-tracks`, {
+    headers: {
+      "Authorization": `Bearer ${access_token}`
+    }
+  })
+
+  return response.data
+}

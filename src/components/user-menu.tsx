@@ -1,23 +1,17 @@
-import { auth } from '@/auth'
+import Link from 'next/link'
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
-import AuthBtn from './auth-btn'
-import { getInitials } from '@/lib/utils'
 
-const UserMenu = async () => {
-
-  const session = await auth()
-
-  if (!session) return <AuthBtn />
+const UserMenu = () => {
 
   return (
     <div className='flex gap-2'>
-      <Avatar>
-        {session.user?.image ? <AvatarImage src={session.user?.image} /> : 
-        <AvatarFallback>{getInitials(session.user?.email ?? 'NN')}</AvatarFallback>}
+      <Avatar className='shadow'>
+        <AvatarImage src='/assets/images/profile-pic.png' />
+        <AvatarFallback>CG</AvatarFallback>
       </Avatar>
       <div className='flex flex-col'>
-        <span className='text-sm font-semibold'>{session.user?.name}</span>
-        <span className='text-xs font-medium text-muted-foreground'>{session.user?.email}</span>
+        <span className='text-sm font-semibold'>Carlos Garavito</span>
+        <Link href='https://www.youtube.com/@Stoodiow' className='text-xs font-medium text-muted-foreground'>@<span className='underline'>stoodiow</span></Link>
       </div>
     </div>
   )

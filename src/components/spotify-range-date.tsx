@@ -1,19 +1,33 @@
+'use client'
 
+import { cn } from '@/lib/utils'
 import { Button } from './ui/button'
 
+const datesBtn = [
+  {
+    value: '4 Wks',
+    active: true
+  },
+  {
+    value: '6 Mths',
+    active: false
+  },
+  {
+    value: 'All Time',
+    active: false
+  }
+]
+
 const SpotifyRangeDate = () => {
+
   return (
     <div className='flex justify-center items-center mb-4'>
-      <div className='flex border shadow rounded-full'>
-        <Button className='rounded-none rounded-s-full hover:bg-foreground active:bg-foreground text-xs hover:text-white active:text-white' size='sm' variant='ghost'>
-          4 Wks
-        </Button>
-        <Button className='rounded-none hover:bg-foreground active:bg-foreground text-xs hover:text-white active:text-white' size='sm' variant='ghost'>
-          6 Mths
-        </Button>
-        <Button className='rounded-none rounded-r-3xl hover:bg-foreground active:bg-foreground text-xs hover:text-white active:text-white' size='sm' variant='ghost'>
-          All Time
-        </Button>
+      <div className='flex border shadow rounded-full overflow-hidden'>
+        {datesBtn.map((btn, index) => (
+          <Button key={index} className={cn('rounded-none hover:bg-foreground text-xs hover:text-white', btn.active && 'bg-foreground text-white')} size='sm' variant='ghost'>
+            {btn.value}
+          </Button>
+        ))}
       </div>
     </div>
   )
