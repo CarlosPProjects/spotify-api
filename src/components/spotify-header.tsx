@@ -10,12 +10,10 @@ import { FC } from 'react'
 import { ISession } from '@/auth'
 
 interface Props {
-  auth: Promise<ISession | null>
+  session: ISession | null
 }
 
-const SpotifyHeader: FC<Props> = async ({ auth }) => {
-
-  const session = await auth
+const SpotifyHeader: FC<Props> = ({ session }) => {
 
   return (
     <header className='w-full flex justify-center sm:justify-between items-center p-4'>

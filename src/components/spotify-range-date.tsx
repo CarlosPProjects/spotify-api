@@ -2,8 +2,8 @@
 
 import { cn } from '@/lib/utils'
 import { Button } from './ui/button'
-import { useSession } from 'next-auth/react'
-import { useState } from 'react'
+import { FC, useState } from 'react'
+import { ISession } from '@/auth'
 
 interface DateButton {
   value: string;
@@ -25,10 +25,13 @@ const initialDatesBtn: DateButton[] = [
   }
 ]
 
-const SpotifyRangeDate = () => {
+interface Props {
+  session: ISession | null
+}
+
+const SpotifyRangeDate: FC<Props> = ({ session }) => {
 
   const [datesBtn, setDatesBtn] = useState(initialDatesBtn)
-  const { data: session } = useSession()
 
   const handleButtonClick = (clickedIndex: number) => {
     setDatesBtn((prevButtons) =>

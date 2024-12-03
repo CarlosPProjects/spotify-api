@@ -1,7 +1,7 @@
 'use client'
 
 import Image from "next/image"
-import { useEffect, useState } from "react"
+import { FC, useEffect, useState } from "react"
 
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -16,8 +16,13 @@ import { IPlayList } from "@/types/spotify/playlist"
 import { SavedTracks } from "@/types/spotify/saved-tracks"
 
 import { dumbData } from "@/data/dumbdata"
+import { ISession } from "@/auth"
 
-const MusicCardList = () => {
+interface Props {
+  session: ISession | null
+}
+
+const MusicCardList: FC<Props> = ({ session }) => {
 
   const [savedTracks, setSavedTracks] = useState<SavedTracks>(dumbData);
 

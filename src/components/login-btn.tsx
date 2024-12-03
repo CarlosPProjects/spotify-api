@@ -10,7 +10,7 @@ const LoginBtn = () => {
   }
 
   return (
-    <Button onClick={handleClick}>
+    <Button onClick={handleClick} variant='ghost'>
       Login
     </Button>
   )

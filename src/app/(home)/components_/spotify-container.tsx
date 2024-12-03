@@ -5,15 +5,15 @@ import SpotifyRangeDate from "@/components/spotify-range-date"
 
 const SpotifyContainer = async () => {
 
-  const session = auth()
+  const session = await auth()
 
   return (
     <div className='w-full flex flex-col flex-1 h-full bg-background rounded-3xl overflow-hidden'>
-      <SpotifyHeader />
+      <SpotifyHeader session={session} />
       <div className='flex-1 flex items-center'>
-        <MusicCardList />
+        <MusicCardList session={session} />
       </div>
-      <SpotifyRangeDate />
+      <SpotifyRangeDate session={session} />
     </div>
   )
 }
