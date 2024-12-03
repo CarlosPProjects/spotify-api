@@ -1,6 +1,7 @@
 import Container from '@/components/container'
 import MusicCardList from '@/components/music-card-list'
 import SpotifyHeader from '@/components/spotify-header'
+import SpotifyRangeDate from '@/components/spotify-range-date'
 import React from 'react'
 
 const Home = () => {
@@ -15,6 +16,7 @@ const Home = () => {
             <div className='flex-1 flex items-center'>
               <MusicCardList />
             </div>
+            <SpotifyRangeDate />
           </div>
         </div>
       </div>
