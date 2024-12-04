@@ -13,12 +13,14 @@ import {
 import { ITopTracks } from "@/types/spotify/top-tracks"
 import { SpotifyContext } from "@/contexts/spotify-context"
 import { ITopArtists } from "@/types/spotify/top-artists"
+import CarouselLoader from "./carousel-loader"
+import SpotifyCard from "./spotify-card"
 
 const MusicCardList = () => {
 
   const { datos, filterType, loading } = useContext(SpotifyContext);
 
-  if (loading) return <div>Loading...</div>
+  if (loading) return <CarouselLoader />
 
   return (
     <Carousel
