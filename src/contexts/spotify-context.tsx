@@ -13,6 +13,7 @@ interface SpotifyContext {
   setDatos: React.Dispatch<React.SetStateAction<ITopTracks | ITopArtists>>;
   filterType: 'tracks' | 'artists';
   setFilterType: React.Dispatch<React.SetStateAction<'tracks' | 'artists'>>;
+  loading: boolean;
 }
 
 export const SpotifyContext = createContext<SpotifyContext>({
@@ -20,17 +21,20 @@ export const SpotifyContext = createContext<SpotifyContext>({
   setDatos: () => { },
   filterType: 'tracks',
   setFilterType: () => { },
+  loading: false,
 });
 
 export const SpotifyContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [datos, setDatos] = useState<ITopTracks | ITopArtists>(dumbData);
   const [filterType, setFilterType] = useState<'tracks' | 'artists'>('tracks');
+  const [loading, setLoading] = useState(false);
   const { data: session } = useSession()
 
   useEffect(() => {
     const fetchDatos = async () => {
       if (session) {
         try {
+          setLoading(true);
           const accessToken = await getUserAccessToken();
           if (!accessToken) {
             console.log('No hay token de acceso');
@@ -49,6 +53,8 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
           }
         } catch (error) {
           console.error('Error al obtener datos:', error);
+        } finally {
+          setLoading(false);
         }
       }
     };
@@ -57,7 +63,7 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
   }, [session, filterType]);
 
   return (
-    <SpotifyContext.Provider value={{ datos, setDatos, filterType, setFilterType }}>
+    <SpotifyContext.Provider value={{ datos, setDatos, filterType, setFilterType, loading }}>
       {children}
     </SpotifyContext.Provider>
   );
