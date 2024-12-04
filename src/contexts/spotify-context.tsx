@@ -40,25 +40,22 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
             console.log('No hay token de acceso');
             return;
           }
-          try {
-            let data;
-            if (filterType === 'tracks') {
-              data = await getCurrentUserTopTracks(accessToken);
-            } else {
-              data = await getCurrentUserTopArtists(accessToken);
-            }
-            setDatos(data);
-          } catch (error) {
-            console.error('Error al obtener datos:', error);
+          let data;
+          if (filterType === 'tracks') {
+            data = await getCurrentUserTopTracks(accessToken);
+          } else {
+            data = await getCurrentUserTopArtists(accessToken);
           }
+          setDatos(data);
         } catch (error) {
           console.error('Error al obtener datos:', error);
+          setDatos(dumbData);
         } finally {
           setLoading(false);
         }
       }
     };
-
+  
     fetchDatos();
   }, [session, filterType]);
 
