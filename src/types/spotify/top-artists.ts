@@ -1,11 +1,11 @@
-export interface ITopItems {
-  href: string
-  limit: number
-  next: string
-  offset: number
-  previous: string
-  total: number
+export interface ITopArtists {
   items: Item[]
+  total: number
+  limit: number
+  offset: number
+  href: string
+  next: string
+  previous: any
 }
 
 export interface Item {
@@ -26,12 +26,12 @@ export interface ExternalUrls {
 }
 
 export interface Followers {
-  href: string
+  href: any
   total: number
 }
 
 export interface Image {
-  url: string
   height: number
+  url: string
   width: number
 }
