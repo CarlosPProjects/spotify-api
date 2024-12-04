@@ -5,10 +5,9 @@ import Image from 'next/image';
 import { Skeleton } from './ui/skeleton';
 
 interface Props {
-
-  image: string
-  name: string
-  aditionalInfo: string
+  image: string | null
+  name: string | null
+  aditionalInfo: string | null
 }
 
 const SpotifyCard: FC<Props> = ({ image, name, aditionalInfo }) => {
