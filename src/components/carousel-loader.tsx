@@ -22,7 +22,7 @@ const CarouselLoader = () => {
                   <div className="flex flex-col gap-6 sm:gap-4 pb-5">
                     <Skeleton className='aspect-square w-full' />
                     <div className="w-full h-full flex flex-col gap-1 items-center justify-center">
-                      <Skeleton className="w-20 h-4" />
+                      <Skeleton className="w-20 h-4 sm:h-3" />
                       <Skeleton className="w-16 h-3" />
                     </div>
                   </div>

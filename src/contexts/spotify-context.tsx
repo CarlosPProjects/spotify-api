@@ -32,30 +32,35 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
 
   useEffect(() => {
     const fetchDatos = async () => {
-      if (session) {
-        try {
-          setLoading(true);
-          const accessToken = await getUserAccessToken();
-          if (!accessToken) {
-            console.log('No hay token de acceso');
-            return;
-          }
-          let data;
-          if (filterType === 'tracks') {
-            data = await getCurrentUserTopTracks(accessToken);
-          } else {
-            data = await getCurrentUserTopArtists(accessToken);
-          }
-          setDatos(data);
-        } catch (error) {
-          console.error('Error al obtener datos:', error);
+      if (!session) return;
+
+      try {
+        setLoading(true);
+        const accessToken = await getUserAccessToken();
+        if (!accessToken) {
+          console.error('No access token available');
           setDatos(dumbData);
-        } finally {
-          setLoading(false);
+          return;
         }
+
+        const data = filterType === 'tracks'
+          ? await getCurrentUserTopTracks(accessToken)
+          : await getCurrentUserTopArtists(accessToken);
+
+        if (data && 'items' in data) {
+          setDatos(data);
+        } else {
+          console.error('Invalid data structure', data);
+          setDatos(dumbData);
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+        setDatos(dumbData);
+      } finally {
+        setLoading(false);
       }
     };
-  
+
     fetchDatos();
   }, [session, filterType]);
 

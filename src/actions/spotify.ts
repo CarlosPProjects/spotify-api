@@ -36,8 +36,8 @@ export const getCurrentUserTopTracks = async (access_token: string) => {
   return response.data
 }
 
-export const getCurrentUserTopArtists = async (access_token: string) => {
-  const response = await axios.get(`${SPOTIFY_ENDPOINT}/me/top/artists?limit=5`, {
+export const getCurrentUserTopArtists = async (access_token: string, time_range: string = "short_term") => {
+  const response = await axios.get(`${SPOTIFY_ENDPOINT}/me/top/artists?time_range${time_range}=&limit=5`, {
     headers: {
       "Authorization": `Bearer ${access_token}`
     }
