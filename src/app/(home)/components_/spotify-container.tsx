@@ -15,7 +15,7 @@ const SpotifyContainer = async () => {
         <div className='w-full flex flex-col flex-1 h-full bg-background rounded-3xl overflow-hidden'>
           <SpotifyHeader session={session} />
           <div className='flex-1 flex items-center'>
-            <MusicCardList session={session} />
+            <MusicCardList />
           </div>
           <SpotifyRangeDate session={session} />
         </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import Image from "next/image"
-import { FC, useContext } from "react"
+import { useContext } from "react"
 
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -10,17 +10,11 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel"
 
-import { ISession } from "@/auth"
 import { ITopTracks } from "@/types/spotify/top-tracks"
 import { SpotifyContext } from "@/contexts/spotify-context"
 import { ITopArtists } from "@/types/spotify/top-artists"
-import { dumbData } from "@/data/dumbdata"
 
-interface Props {
-  session: ISession | null
-}
-
-const MusicCardList: FC<Props> = ({ session }) => {
+const MusicCardList = () => {
 
   const { datos, filterType, loading } = useContext(SpotifyContext);
 
@@ -60,7 +54,7 @@ const MusicCardList: FC<Props> = ({ session }) => {
                 </Card>
               </div>
             </CarouselItem>
-          )) : (datos as ITopArtists).items.map(({ id, images, name, followers, genres }) => (
+          )) : (datos as ITopArtists).items.map(({ id, images, name, genres }) => (
             <CarouselItem key={id} className="pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
               <div className="p-0">
                 <Card className="group space-y-4 border-none shadow-none">
