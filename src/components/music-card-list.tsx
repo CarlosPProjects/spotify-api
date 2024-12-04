@@ -15,11 +15,6 @@ const MusicCardList = () => {
 
   if (loading) return <CarouselLoader />
 
-  // // Comprehensive type and null checks
-  // if (!datos || !('items' in datos) || !datos.items || datos.items.length === 0) {
-  //   return <div>No data available</div>
-  // }
-
   return (
     <Carousel
       opts={{
@@ -32,7 +27,6 @@ const MusicCardList = () => {
       <CarouselContent className="-ml-4">
         {filterType === 'tracks' 
           ? (datos as ITopTracks).items.map((item: TrackItem) => {
-              // Specific checks for tracks
               if (!item.album || !item.album.images || !item.album.images.length) return null;
               return (
                 <SpotifyCard 
@@ -44,7 +38,7 @@ const MusicCardList = () => {
               )
             }).filter(Boolean)
           : (datos as ITopArtists).items.map((item: ArtistItem) => {
-              // Specific checks for artists
+
               if (!item.images || !item.images.length) return null;
               return (
                 <SpotifyCard 

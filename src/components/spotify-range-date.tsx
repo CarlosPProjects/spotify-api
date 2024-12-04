@@ -6,21 +6,25 @@ import { FC, useState } from 'react'
 import { ISession } from '@/auth'
 
 interface DateButton {
+  label: string;
   value: string;
   active: boolean;
 }
 
 const initialDatesBtn: DateButton[] = [
   {
-    value: '4 Wks',
+    label: '4 Wks',
+    value: 'short_term',
     active: true
   },
   {
-    value: '6 Mths',
+    label: '6 Wks',
+    value: 'medium_term',
     active: false
   },
   {
-    value: 'All Time',
+    label: 'All Time',
+    value: 'long_term',
     active: false
   }
 ]
@@ -32,8 +36,9 @@ interface Props {
 const SpotifyRangeDate: FC<Props> = ({ session }) => {
 
   const [datesBtn, setDatesBtn] = useState(initialDatesBtn)
+  // const { }
 
-  const handleButtonClick = (clickedIndex: number) => {
+  const handleButtonClick = (clickedIndex: number, value: string) => {
     setDatesBtn((prevButtons) =>
       prevButtons.map((btn: DateButton, index: number) => ({
         ...btn,
@@ -52,9 +57,10 @@ const SpotifyRangeDate: FC<Props> = ({ session }) => {
             className={cn('rounded-none hover:bg-foreground text-xs hover:text-white', btn.active && 'bg-foreground text-white')}
             size='sm'
             variant='ghost'
-            onClick={() => handleButtonClick(index)}
+            value={btn.value}
+            onClick={() => handleButtonClick(index, btn.value)}
           >
-            {btn.value}
+            {btn.label}
           </Button>
         ))}
       </div>

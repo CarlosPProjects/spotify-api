@@ -42,8 +42,8 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
 
       try {
         const data = filterType === 'tracks'
-          ? await getCurrentUserTopTracks(accessToken)
-          : await getCurrentUserTopArtists(accessToken);
+          ? await getCurrentUserTopTracks(accessToken, 'short_term')
+          : await getCurrentUserTopArtists(accessToken, 'short_term');
 
         if (data && 'items' in data) {
           setDatos(data);
@@ -51,13 +51,9 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
           console.error('Invalid data structure', data);
           setDatos(dumbData);
         }
-      } catch (error: any) {
-        if (error.response && error.response.status === 401) {
-          await logout();
-        } else {
-          console.error('Fetch error:', error);
-          setDatos(dumbData);
-        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        await logout();
       }
     } catch (error) {
       console.error('Access token error:', error);
