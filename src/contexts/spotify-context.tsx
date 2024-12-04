@@ -3,7 +3,7 @@
 import { getCurrentUserTopArtists, getCurrentUserTopTracks } from '@/actions/spotify';
 import { useSession } from "next-auth/react"
 import { createContext, useState, useEffect, useCallback, useMemo } from 'react';
-import { getUserAccessToken } from '@/actions/auth';
+import { getUserAccessToken, logout } from '@/actions/auth';
 import { ITopTracks } from '@/types/spotify/top-tracks';
 import { ITopArtists } from '@/types/spotify/top-artists';
 import { dumbData } from '@/data/dumbdata';
@@ -37,24 +37,30 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
       setLoading(true);
       const accessToken = await getUserAccessToken();
       if (!accessToken) {
-        console.error('No access token available');
-        setDatos(dumbData);
-        return;
+        throw new Error('Access token is undefined');
       }
 
-      const data = filterType === 'tracks'
-        ? await getCurrentUserTopTracks(accessToken)
-        : await getCurrentUserTopArtists(accessToken);
+      try {
+        const data = filterType === 'tracks'
+          ? await getCurrentUserTopTracks(accessToken)
+          : await getCurrentUserTopArtists(accessToken);
 
-      if (data && 'items' in data) {
-        setDatos(data);
-      } else {
-        console.error('Invalid data structure', data);
-        setDatos(dumbData);
+        if (data && 'items' in data) {
+          setDatos(data);
+        } else {
+          console.error('Invalid data structure', data);
+          setDatos(dumbData);
+        }
+      } catch (error: any) {
+        if (error.response && error.response.status === 401) {
+          await logout();
+        } else {
+          console.error('Fetch error:', error);
+          setDatos(dumbData);
+        }
       }
     } catch (error) {
-      console.error('Fetch error:', error);
-      setDatos(dumbData);
+      console.error('Access token error:', error);
     } finally {
       setLoading(false);
     }
