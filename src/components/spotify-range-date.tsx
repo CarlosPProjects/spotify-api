@@ -2,12 +2,15 @@
 
 import { cn } from '@/lib/utils'
 import { Button } from './ui/button'
-import { FC, useState } from 'react'
+import { FC, useContext, useState } from 'react'
 import { ISession } from '@/auth'
+import { SpotifyContext } from '@/contexts/spotify-context'
+import { getCurrentUserTopArtists, getCurrentUserTopTracks } from '@/actions/spotify'
+import { getUserAccessToken } from '@/actions/auth'
 
 interface DateButton {
   label: string;
-  value: string;
+  value: 'short_term' | 'medium_term' | 'long_term';
   active: boolean;
 }
 
@@ -36,15 +39,34 @@ interface Props {
 const SpotifyRangeDate: FC<Props> = ({ session }) => {
 
   const [datesBtn, setDatesBtn] = useState(initialDatesBtn)
-  // const { }
+  const { setDatos, loading, filterType, setLoading } = useContext(SpotifyContext)
 
-  const handleButtonClick = (clickedIndex: number, value: string) => {
+  const handleButtonClick = async (clickedIndex: number, value: 'short_term' | 'medium_term' | 'long_term') => {
+    setLoading(true)
     setDatesBtn((prevButtons) =>
       prevButtons.map((btn: DateButton, index: number) => ({
         ...btn,
         active: index === clickedIndex
       }))
     )
+
+    const accessToken = await getUserAccessToken();
+
+    if (!accessToken) {
+      console.error('Access token is undefined');
+      return;
+    }
+
+    let data
+    if (filterType === 'tracks') {
+      data = await getCurrentUserTopTracks(accessToken, value)
+      console.log('data', data);
+    } else {
+      data = await getCurrentUserTopArtists(accessToken, value)
+      console.log('data', data);
+    }
+    setDatos(data)
+    setLoading(false)
   }
 
   return (
@@ -52,7 +74,7 @@ const SpotifyRangeDate: FC<Props> = ({ session }) => {
       <div className='flex shadow rounded-full overflow-hidden'>
         {datesBtn.map((btn, index) => (
           <Button
-            disabled={!session}
+            disabled={!session || loading}
             key={index}
             className={cn('rounded-none hover:bg-foreground text-xs hover:text-white', btn.active && 'bg-foreground text-white')}
             size='sm'

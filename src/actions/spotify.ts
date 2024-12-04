@@ -27,7 +27,7 @@ export const getSpotifyToken = async (): Promise<AccessTokenResponse> => {
 }
 
 export const getCurrentUserTopTracks = async (access_token: string, time_range?: "short_term" | "medium_term" | "long_term") => {
-  const response = await axios.get(`${SPOTIFY_ENDPOINT}/me/top/tracks??time_range${time_range}&limit=5`, {
+  const response = await axios.get(`${SPOTIFY_ENDPOINT}/me/top/tracks?time_range=${time_range}&limit=5`, {
     headers: {
       "Authorization": `Bearer ${access_token}`
     }
@@ -37,7 +37,7 @@ export const getCurrentUserTopTracks = async (access_token: string, time_range?:
 }
 
 export const getCurrentUserTopArtists = async (access_token: string, time_range?: "short_term" | "medium_term" | "long_term") => {
-  const response = await axios.get(`${SPOTIFY_ENDPOINT}/me/top/artists?time_range${time_range}=&limit=5`, {
+  const response = await axios.get(`${SPOTIFY_ENDPOINT}/me/top/artists?time_range=${time_range}&limit=5`, {
     headers: {
       "Authorization": `Bearer ${access_token}`
     }

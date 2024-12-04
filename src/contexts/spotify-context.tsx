@@ -14,6 +14,7 @@ interface SpotifyContext {
   filterType: 'tracks' | 'artists';
   setFilterType: React.Dispatch<React.SetStateAction<'tracks' | 'artists'>>;
   loading: boolean;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const SpotifyContext = createContext<SpotifyContext>({
@@ -22,6 +23,7 @@ export const SpotifyContext = createContext<SpotifyContext>({
   filterType: 'tracks',
   setFilterType: () => { },
   loading: false,
+  setLoading: () => { }
 });
 
 export const SpotifyContextProvider = ({ children }: { children: React.ReactNode }) => {
@@ -71,7 +73,8 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
     setDatos,
     filterType,
     setFilterType,
-    loading
+    loading,
+    setLoading
   }), [datos, filterType, loading]);
 
 
