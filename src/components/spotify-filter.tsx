@@ -20,8 +20,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import SoundWave from "./sound-wave"
-import { getUserAccessToken } from "@/actions/auth"
-import { getCurrentUserTopArtists, getCurrentUserTopTracks } from "@/actions/spotify"
+import { useContext } from "react"
+import { SpotifyContext } from "@/contexts/spotify-context"
 
 const filterSchema = z.object({
   filter: z
@@ -32,24 +32,16 @@ const filterSchema = z.object({
 
 const SpotifyFilter = () => {
 
+  const { setFilterType } = useContext(SpotifyContext);
   const form = useForm<z.infer<typeof filterSchema>>({
     resolver: zodResolver(filterSchema),
-  })
+    defaultValues: {
+      filter: 'tracks',
+    },
+  });
 
-  async function onSubmit(data: z.infer<typeof filterSchema>) {
-    const accessToken = await getUserAccessToken()
-    if (!accessToken) return;
-
-    switch (data.filter) {
-      case "tracks":
-        const res1 = await getCurrentUserTopTracks(accessToken)
-        console.log(res1);
-        break;
-      case "artists":
-        const res2 = await getCurrentUserTopArtists(accessToken)
-        console.log(res2);
-        break;
-    }
+  function onSubmit(data: z.infer<typeof filterSchema>) {
+    setFilterType(data.filter as 'tracks' | 'artists');
   }
 
   return (

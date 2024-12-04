@@ -1,33 +1,52 @@
 'use client'
 
-import { getCurrentUserTopTracks } from '@/actions/spotify';
+import { getCurrentUserTopArtists, getCurrentUserTopTracks } from '@/actions/spotify';
 import { useSession } from "next-auth/react"
-import { ITopItems } from '@/types/spotify/top-items';
 import { createContext, useState, useEffect } from 'react';
 import { getUserAccessToken } from '@/actions/auth';
+import { ITopTracks } from '@/types/spotify/top-tracks';
+import { ITopArtists } from '@/types/spotify/top-artists';
+import { dumbData } from '@/data/dumbdata';
 
 interface SpotifyContext {
-  datos: ITopItems | null;
-  setDatos: React.Dispatch<React.SetStateAction<ITopItems | null>>;
-};
+  datos: ITopTracks | ITopArtists;
+  setDatos: React.Dispatch<React.SetStateAction<ITopTracks | ITopArtists>>;
+  filterType: 'tracks' | 'artists';
+  setFilterType: React.Dispatch<React.SetStateAction<'tracks' | 'artists'>>;
+}
 
-export const SpotifyContext = createContext<SpotifyContext | null>(null);
+export const SpotifyContext = createContext<SpotifyContext>({
+  datos: dumbData,
+  setDatos: () => { },
+  filterType: 'tracks',
+  setFilterType: () => { },
+});
 
 export const SpotifyContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const [datos, setDatos] = useState<ITopItems | null>(null);
+  const [datos, setDatos] = useState<ITopTracks | ITopArtists>(dumbData);
+  const [filterType, setFilterType] = useState<'tracks' | 'artists'>('tracks');
   const { data: session } = useSession()
 
   useEffect(() => {
     const fetchDatos = async () => {
       if (session) {
-        const accessToken = await getUserAccessToken();
-        if (!accessToken) {
-          console.log('No hay token de acceso');
-          return;
-        }
         try {
-          const data = await getCurrentUserTopTracks(accessToken);
-          setDatos(data);
+          const accessToken = await getUserAccessToken();
+          if (!accessToken) {
+            console.log('No hay token de acceso');
+            return;
+          }
+          try {
+            let data;
+            if (filterType === 'tracks') {
+              data = await getCurrentUserTopTracks(accessToken);
+            } else {
+              data = await getCurrentUserTopArtists(accessToken);
+            }
+            setDatos(data);
+          } catch (error) {
+            console.error('Error al obtener datos:', error);
+          }
         } catch (error) {
           console.error('Error al obtener datos:', error);
         }
@@ -35,10 +54,10 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
     };
 
     fetchDatos();
-  }, [session]);
+  }, [session, filterType]);
 
   return (
-    <SpotifyContext.Provider value={{ datos, setDatos }}>
+    <SpotifyContext.Provider value={{ datos, setDatos, filterType, setFilterType }}>
       {children}
     </SpotifyContext.Provider>
   );
