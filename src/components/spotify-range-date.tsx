@@ -39,34 +39,16 @@ interface Props {
 const SpotifyRangeDate: FC<Props> = ({ session }) => {
 
   const [datesBtn, setDatesBtn] = useState(initialDatesBtn)
-  const { setDatos, loading, filterType, setLoading } = useContext(SpotifyContext)
+  const { setDateRange } = useContext(SpotifyContext)
 
   const handleButtonClick = async (clickedIndex: number, value: 'short_term' | 'medium_term' | 'long_term') => {
-    setLoading(true)
     setDatesBtn((prevButtons) =>
       prevButtons.map((btn: DateButton, index: number) => ({
         ...btn,
         active: index === clickedIndex
       }))
     )
-
-    const accessToken = await getUserAccessToken();
-
-    if (!accessToken) {
-      console.error('Access token is undefined');
-      return;
-    }
-
-    let data
-    if (filterType === 'tracks') {
-      data = await getCurrentUserTopTracks(accessToken, value)
-      console.log('data', data);
-    } else {
-      data = await getCurrentUserTopArtists(accessToken, value)
-      console.log('data', data);
-    }
-    setDatos(data)
-    setLoading(false)
+    setDateRange(value)
   }
 
   return (
@@ -74,7 +56,7 @@ const SpotifyRangeDate: FC<Props> = ({ session }) => {
       <div className='flex shadow rounded-full overflow-hidden'>
         {datesBtn.map((btn, index) => (
           <Button
-            disabled={!session || loading}
+            disabled={!session}
             key={index}
             className={cn('rounded-none hover:bg-foreground text-xs hover:text-white', btn.active && 'bg-foreground text-white')}
             size='sm'
