@@ -5,8 +5,6 @@ import { Button } from './ui/button'
 import { FC, useContext, useState } from 'react'
 import { ISession } from '@/auth'
 import { SpotifyContext } from '@/contexts/spotify-context'
-import { getCurrentUserTopArtists, getCurrentUserTopTracks } from '@/actions/spotify'
-import { getUserAccessToken } from '@/actions/auth'
 
 interface DateButton {
   label: string;
@@ -21,7 +19,7 @@ const initialDatesBtn: DateButton[] = [
     active: true
   },
   {
-    label: '6 Wks',
+    label: '6 Mths',
     value: 'medium_term',
     active: false
   },

@@ -3,7 +3,7 @@
 import { getCurrentUserTopArtists, getCurrentUserTopTracks } from '@/actions/spotify';
 import { useSession } from "next-auth/react"
 import { createContext, useState, useEffect, useCallback, useMemo } from 'react';
-import { getUserAccessToken, login } from '@/actions/auth';
+import { getUserAccessToken, logout } from '@/actions/auth';
 import { ITopTracks } from '@/types/spotify/top-tracks';
 import { ITopArtists } from '@/types/spotify/top-artists';
 import { dumbData } from '@/data/dumbdata';
@@ -60,7 +60,7 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
         }
       } catch (fetchError) {
         console.log(fetchError instanceof Error ? fetchError.message : 'Unknown error');
-        await login('spotify');
+        await logout();
       }
     } catch (tokenError) {
       console.error(tokenError);

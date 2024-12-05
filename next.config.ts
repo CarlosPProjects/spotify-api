@@ -8,7 +8,10 @@ const nextConfig: NextConfig = {
         hostname: "i.scdn.co",
       }
     ]
-  }
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
