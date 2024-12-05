@@ -3,7 +3,7 @@
 import { getCurrentUserTopArtists, getCurrentUserTopTracks } from '@/actions/spotify';
 import { useSession } from "next-auth/react"
 import { createContext, useState, useEffect, useCallback, useMemo } from 'react';
-import { getUserAccessToken, logout } from '@/actions/auth';
+import { getUserAccessToken, login, logout } from '@/actions/auth';
 import { ITopTracks } from '@/types/spotify/top-tracks';
 import { ITopArtists } from '@/types/spotify/top-artists';
 import { dumbData } from '@/data/dumbdata';
@@ -60,7 +60,7 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
         }
       } catch (error) {
         console.error('Error fetching data:', error);
-        await logout();
+        await login('spotify');
       }
     } catch (error) {
       console.error('Access token error:', error);
