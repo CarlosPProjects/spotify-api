@@ -22,7 +22,7 @@ const SpotifyCard: FC<Props> = ({ image, name, aditionalInfo }) => {
                 </div>
                 <Image className="max-sm:animate-spinDisc p-2" src='/assets/images/disc-vinyl.webp' alt="disco-de-vinilo" fill />
               </div>
-              <div className="w-full h-full flex flex-col gap-1 items-center justify-center text-center">
+              <div className="w-full h-full flex flex-col gap-1 items-center justify-center text-center px-2">
                 <span className="text-lg sm:text-xs text-foreground font-semibold">{name}</span>
                 <span className="text-xs text-muted-foreground capitalize">{aditionalInfo}</span>
               </div>

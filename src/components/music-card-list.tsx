@@ -20,7 +20,6 @@ const MusicCardList = () => {
       opts={{
         align: "start",
         loop: true,
-        dragFree: true,
       }}
       className="w-full"
     >
