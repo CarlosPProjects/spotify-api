@@ -3,7 +3,7 @@
 import { getCurrentUserTopArtists, getCurrentUserTopTracks } from '@/actions/spotify';
 import { useSession } from "next-auth/react"
 import { createContext, useState, useEffect, useCallback, useMemo } from 'react';
-import { getUserAccessToken, login, logout } from '@/actions/auth';
+import { getUserAccessToken, login } from '@/actions/auth';
 import { ITopTracks } from '@/types/spotify/top-tracks';
 import { ITopArtists } from '@/types/spotify/top-artists';
 import { dumbData } from '@/data/dumbdata';
@@ -35,8 +35,6 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
   const [filterType, setFilterType] = useState<'tracks' | 'artists'>('tracks');
   const [loading, setLoading] = useState(false);
   const [dateRange, setDateRange] = useState<'short_term' | 'medium_term' | 'long_term'>('short_term');
-
-  const [error, setError] = useState<string | null>(null);
   const { status } = useSession();
 
   const fetchDatos = useCallback(async () => {
@@ -44,7 +42,6 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
 
     try {
       setLoading(true);
-      setError(null);
       const accessToken = await getUserAccessToken();
       if (!accessToken) {
         throw new Error('Access token is undefined');
@@ -62,12 +59,11 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
           setDatos(dumbData);
         }
       } catch (fetchError) {
-        setError(fetchError instanceof Error ? fetchError.message : 'Unknown error');
+        console.log(fetchError instanceof Error ? fetchError.message : 'Unknown error');
         await login('spotify');
       }
     } catch (tokenError) {
       console.error(tokenError);
-      setError('Error de autenticación');
     } finally {
       setLoading(false);
     }
@@ -85,7 +81,7 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
     loading,
     setLoading,
     dateRange,
-    setDateRange
+    setDateRange,
   }), [datos, filterType, loading, dateRange]);
 
 
