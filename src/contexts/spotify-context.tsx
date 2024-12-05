@@ -35,6 +35,8 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
   const [filterType, setFilterType] = useState<'tracks' | 'artists'>('tracks');
   const [loading, setLoading] = useState(false);
   const [dateRange, setDateRange] = useState<'short_term' | 'medium_term' | 'long_term'>('short_term');
+
+  const [error, setError] = useState<string | null>(null);
   const { status } = useSession();
 
   const fetchDatos = useCallback(async () => {
@@ -42,6 +44,7 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
 
     try {
       setLoading(true);
+      setError(null);
       const accessToken = await getUserAccessToken();
       if (!accessToken) {
         throw new Error('Access token is undefined');
@@ -58,12 +61,13 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
           console.error('Invalid data structure', data);
           setDatos(dumbData);
         }
-      } catch (error) {
-        console.error('Error fetching data:', error);
+      } catch (fetchError) {
+        setError(fetchError instanceof Error ? fetchError.message : 'Unknown error');
         await login('spotify');
       }
-    } catch (error) {
-      console.error('Access token error:', error);
+    } catch (tokenError) {
+      console.error(tokenError);
+      setError('Error de autenticación');
     } finally {
       setLoading(false);
     }
