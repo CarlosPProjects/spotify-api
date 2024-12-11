@@ -1,36 +1,172 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Proyecto: Visualización de Música en Spotify
 
-## Getting Started
+## Introducción
+Hoy quiero compartir un proyecto personal que me ha permitido mejorar mis habilidades técnicas mientras combino dos de mis pasiones: la programación y la música.
 
-First, run the development server:
+## ✨ ¿Qué hace esta aplicación?
+Permite a los usuarios visualizar sus canciones y artistas más escuchados en períodos personalizados:
+- Últimas 4 semanas
+- Últimos 6 meses
+- Todo el tiempo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Una vez autenticado con Spotify, puedes filtrar entre "Top Tracks" y "Top Artists" y explorar tus datos musicales presentados en un carousel. Cada tarjeta incluye:
+
+- **Tracks**: Título y artista.
+- **Artists**: Nombre del artista y género musical.
+
+## 💻 Tecnologías utilizadas
+Esta aplicación está desarrollada con:
+- **Next.js** para una experiencia rápida y dinámica.
+- **TypeScript** para tipado seguro y mantenibilidad.
+- **TailwindCSS** y **shadcn/ui** para un diseño intuitivo y atractivo.
+- **Auth.js** para la autenticación segura con Spotify.
+
+## 🛠 Retos y aprendizajes técnicos
+Este proyecto me ayudó a profundizar en el uso de hooks avanzados como `useCallback`, `useMemo` y `useContext`, asegurando un mejor rendimiento y evitando renderizados innecesarios. También aprendí a gestionar correctamente los *scopes* requeridos por la API de Spotify para cada petición.
+
+## 🎨 Diseño inspirado
+Este proyecto fue inspirado en una aplicación para macOS que sincroniza vinilos con Spotify y un video que vi en redes sociales.
+
+## 🔧 Instalación y uso
+1. Clona este repositorio:
+   ```bash
+   git clone https://github.com/tu-usuario/spotify-visualization.git
+   ```
+2. Instala las dependencias:
+   ```bash
+   npm install --force
+   ```
+3. Ejecuta la aplicación:
+   ```bash
+   npm run dev
+   ```
+4. Autentícate con tu cuenta de Spotify y explora tus datos musicales.
+
+## Hooks destacados
+
+### useCallback
+#### Qué es
+`useCallback` es un hook de React que memoiza una función para evitar que se recree en cada renderizado, salvo que sus dependencias cambien.
+
+#### Cómo funciona
+1. **Primer renderizado:** Crea y guarda la función.
+2. **Renderizados posteriores:**
+   - Si las dependencias no cambian, devuelve la misma instancia de la función.
+   - Si alguna dependencia cambia, crea una nueva función.
+
+#### Ventajas
+- Reduce renderizados innecesarios en componentes hijos.
+- Mejora el rendimiento al evitar la recreación de funciones costosas.
+
+#### Ejemplo
+```tsx
+const fetchDatos = useCallback(async () => {
+  if (status !== 'authenticated') return;
+
+  try {
+    setLoading(true);
+    const accessToken = await getUserAccessToken();
+    const data = filterType === 'tracks'
+      ? await getCurrentUserTopTracks(accessToken)
+      : await getCurrentUserTopArtists(accessToken);
+
+    if (data && 'items' in data) {
+      setDatos(data);
+    }
+  } catch (error) {
+    console.error('Fetch error:', error);
+  } finally {
+    setLoading(false);
+  }
+}, [filterType, status]);
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### useMemo
+#### Qué es
+`useMemo` memoiza el resultado de una computación para evitar recalcularlo innecesariamente, salvo que las dependencias cambien.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### Cómo funciona
+1. **Primer renderizado:** Calcula y guarda el valor.
+2. **Renderizados posteriores:**
+   - Si las dependencias no cambian, devuelve el mismo valor memoizado.
+   - Si alguna dependencia cambia, recalcula el valor.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+#### Ventajas
+- Evita la creación de nuevos objetos en cada renderizado.
+- Optimiza componentes que dependen de valores complejos.
 
-## Learn More
+#### Ejemplo
+```tsx
+const contextValue = useMemo(() => ({
+  datos,
+  setDatos,
+  filterType,
+  setFilterType,
+  loading
+}), [datos, filterType, loading]);
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Ejemplo completo del código
+```tsx
+export const SpotifyContextProvider = ({ children }: { children: React.ReactNode }) => {
+  const [datos, setDatos] = useState<ITopTracks | ITopArtists>(dumbData);
+  const [filterType, setFilterType] = useState<'tracks' | 'artists'>('tracks');
+  const [loading, setLoading] = useState(false);
+  const { status } = useSession();
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  const fetchDatos = useCallback(async () => {
+    if (status !== 'authenticated') return;
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    try {
+      setLoading(true);
+      const accessToken = await getUserAccessToken();
+      const data = filterType === 'tracks'
+        ? await getCurrentUserTopTracks(accessToken)
+        : await getCurrentUserTopArtists(accessToken);
 
-## Deploy on Vercel
+      if (data && 'items' in data) {
+        setDatos(data);
+      }
+    } catch (error) {
+      console.error('Fetch error:', error);
+    } finally {
+      setLoading(false);
+    }
+  }, [filterType, status]);
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+  useEffect(() => {
+    fetchDatos();
+  }, [fetchDatos]);
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+  const contextValue = useMemo(() => ({
+    datos,
+    setDatos,
+    filterType,
+    setFilterType,
+    loading
+  }), [datos, filterType, loading]);
+
+  return (
+    <SpotifyContext.Provider value={contextValue}>
+      {children}
+    </SpotifyContext.Provider>
+  );
+};
+```
+
+## Beneficios de rendimiento
+1. `useCallback` minimiza la recreación de la función `fetchDatos`.
+2. `useMemo` optimiza el valor del contexto para evitar renderizados innecesarios.
+3. Ambos hooks contribuyen a mejorar la eficiencia del componente.
+
+## Cuándo utilizarlos
+- Usa `useCallback` para funciones que se pasan como props a componentes hijos.
+- Usa `useMemo` para computaciones complejas o valores referenciados en dependencias de otros hooks.
+- No abuses de ellos: úncamente cuando notes problemas de rendimiento.
+
+## Contribuciones
+Las contribuciones son bienvenidas. Si tienes sugerencias o encuentras errores, por favor abre un *issue* o envía un *pull request*.
+
+---
+
+¡Gracias por revisar este proyecto! Espero que este ejemplo te ayude a comprender mejor `useCallback`, `useMemo` y `useContext`.
