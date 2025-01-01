@@ -1,33 +1,25 @@
 ![image](https://github.com/user-attachments/assets/eac0027f-b0d9-43a2-956f-8fc620d39b76)
 
-# Proyecto: Visualización de Música en Spotify
+¿Te apasiona la música y la programación? En este tutorial paso a paso, aprenderás a desarrollar una aplicación web que utiliza la API de Spotify para visualizar tus canciones y artistas más escuchados. Este video está diseñado para guiarte desde la configuración inicial hasta el despliegue, explicando cada detalle del proceso.
 
-## Introducción
-Hoy quiero compartir un proyecto personal que me ha permitido mejorar mis habilidades técnicas mientras combino dos de mis pasiones: la programación y la música.
+☑️ *¿Qué aprenderás?*
 
-## ✨ ¿Qué hace esta aplicación?
-Permite a los usuarios visualizar sus canciones y artistas más escuchados en períodos personalizados:
-- Últimas 4 semanas
-- Últimos 6 meses
-- Todo el tiempo
+- Configurar *Auth.js* para autenticación segura con Spotify.
+- Integrar la API de Spotify para obtener datos como "Top Tracks" y "Top Artists".
+- Diseñar componentes dinámicos y atractivos usando *Next.js* y *TailwindCSS*.
+- Optimizar tu aplicación utilizando hooks avanzados como `useCallback`, `useMemo` y `useContext`.
+- Manejar scopes de autenticación y realizar fetchs eficientes a los endpoints de Spotify.
 
-Una vez autenticado con Spotify, puedes filtrar entre "Top Tracks" y "Top Artists" y explorar tus datos musicales presentados en un carousel. Cada tarjeta incluye:
+☑️ *Características del proyecto:*
 
-- **Tracks**: Título y artista.
-- **Artists**: Nombre del artista y género musical.
+- Períodos personalizados para tus datos: últimas 4 semanas, 6 meses y todo el tiempo.
+- Presentación de datos en un carousel con tarjetas detalladas:
+    - *Tracks*: Título y artista.
+    - *Artists*: Nombre y género musical.
 
-## 💻 Tecnologías utilizadas
-Esta aplicación está desarrollada con:
-- **Next.js** para una experiencia rápida y dinámica.
-- **TypeScript** para tipado seguro y mantenibilidad.
-- **TailwindCSS** y **shadcn/ui** para un diseño intuitivo y atractivo.
-- **Auth.js** para la autenticación segura con Spotify.
+☑️ *Tecnologías utilizadas:*
 
-## 🛠 Retos y aprendizajes técnicos
-Este proyecto me ayudó a profundizar en el uso de hooks avanzados como `useCallback`, `useMemo` y `useContext`, asegurando un mejor rendimiento y evitando renderizados innecesarios. También aprendí a gestionar correctamente los *scopes* requeridos por la API de Spotify para cada petición.
-
-## 🎨 Diseño inspirado
-Este proyecto fue inspirado en una aplicación para macOS que sincroniza vinilos con Spotify y un video que vi en redes sociales.
+Next.js, TypeScript, TailwindCSS, shadcn/ui y Auth.js.
 
 ## 🔧 Instalación y uso
 1. Clona este repositorio:
