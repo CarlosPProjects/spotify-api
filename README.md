@@ -168,5 +168,3 @@ export const SpotifyContextProvider = ({ children }: { children: React.ReactNode
 Las contribuciones son bienvenidas. Si tienes sugerencias o encuentras errores, por favor abre un *issue* o envía un *pull request*.
 
 ---
-
-¡Gracias por revisar este proyecto! Espero que este ejemplo te ayude a comprender mejor `useCallback`, `useMemo` y `useContext`.
