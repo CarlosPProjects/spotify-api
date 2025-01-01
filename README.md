@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/eac0027f-b0d9-43a2-956f-8fc620d39b76)
+
 # Proyecto: Visualización de Música en Spotify
 
 ## Introducción
